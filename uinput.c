@@ -7,20 +7,33 @@ static struct input_event      ui_ev;
 static int                     ui_fd;
 static int                     ui_initiated = 0;
 
-#define send_key_macro(x) \
-    inline int send_key_##x(uint16_t key) {  \
-        return send_event(EV_KEY, key, x);   \
-    }
-    
 #define uinput_return_not_initiated() \
 	if(!ui_initiated) {    \
 		return -2;             \
 	}
 
+/*
+#define send_key_macro(x) \
+    inline int send_key_##x(uint16_t key) {  \
+        return send_event(EV_KEY, key, x);   \
+    }
 
 send_key_macro(press);
 send_key_macro(release);
 send_key_macro(autorepeat);
+*/
+
+int send_key_press(uint16_t key) {
+    return send_event(EV_KEY, key, press);
+}
+
+int send_key_release(uint16_t key) {
+    return send_event(EV_KEY, key, release);
+}
+
+int send_key_autorepeat(uint16_t key) {
+    return send_event(EV_KEY, key, autorepeat);
+}
 
 static int uinput_open_fd()
 {

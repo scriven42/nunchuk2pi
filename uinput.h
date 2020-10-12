@@ -18,6 +18,9 @@
 #define press      1
 #define autorepeat 2
 
+int send_key_press(uint16_t key);
+int send_key_release(uint16_t key);
+int send_key_autorepeat(uint16_t key);
 
 int uinput_init();
 int uinput_exit();
