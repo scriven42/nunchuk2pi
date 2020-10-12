@@ -3,6 +3,8 @@ nunchuk2pi
 
 Connect Wii nunchuk to the Raspberry Pi (Linux)
 
+I added a hard-coded limit to how fast the mouse moves, which I found worked better, but there were no other functional changes from xerpi's original.
+
 Getting started
 ===============
 
