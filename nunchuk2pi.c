@@ -25,8 +25,7 @@ void catch_signal(int signal);
 void nunchuk_print_data(struct nunchuk* n);
 void read_callback(int read_success);
 
-const int MAXJOYSPEED = 10;
-const int MINJOYSPEED = -(MAXJOYSPEED);
+const float JOYSPEEDRATIO = 1.6;
 
 int main(int argc, char *argv[])
 {
@@ -49,12 +48,8 @@ void read_callback(int read_success)
 		int y = -(nun.Y-128);
 		if(abs(x) < 15) x = 0;
 		if(abs(y) < 15) y = 0;
-		x = (int)((float)x/7.5f);
-		if (x < MINJOYSPEED) x = MINJOYSPEED;
-		if (x > MAXJOYSPEED) x = MAXJOYSPEED;
-		y = (int)((float)y/7.5f);
-		if (y < MINJOYSPEED) y = MINJOYSPEED;
-		if (y > MAXJOYSPEED) y = MAXJOYSPEED;
+		x = (int)((float)x/7.5f/JOYSPEEDRATIO);
+		y = (int)((float)y/7.5f/JOYSPEEDRATIO);
 		send_rel_mouse(x, y);
 		if(nun.C && !last_nun.C) {
 			send_key_press(BTN_LEFT);
